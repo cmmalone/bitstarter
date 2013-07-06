@@ -4,17 +4,17 @@ var express = require('express');
 var app = express.createServer(express.logger());
 
 function getString(){
-  fs.readFile('index.html', "utf8", function(err, data){
-	if(err) throw err;
-	console.log(data);
-//	buffer.write(data);
-  });
+  var data = fs.readFile("index.html", "utf8");
+  console.log(data);
+  return data;  
 };
 
 app.get('/', function(request, response) {
 //  var buffer = getString();
 //  console.log(buffer );
-  response.send( getString() );
+  var string = getString();
+  response.send(string );
+  console.log( string );
 });
 
 var port = process.env.PORT || 5000;
