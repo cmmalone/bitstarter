@@ -1,20 +1,20 @@
+var fs = require('fs');
 var express = require('express');
 
 var app = express.createServer(express.logger());
 
-var getString(){
-//  var buffer = new Buffer(16);
-//  fs.readFile('index.html', function(err, data){
-//	if(err) throw err;
-//	buff.write(data);
-//  };
-  var buffer = new Buffer("test");
-  return buffer;
-}
+function getString(){
+  fs.readFile('index.html', "utf8", function(err, data){
+	if(err) throw err;
+	console.log(data);
+//	buffer.write(data);
+  });
+};
 
 app.get('/', function(request, response) {
-  var buffer = getString();
-  response.send(buffer.toString() );
+//  var buffer = getString();
+//  console.log(buffer );
+  response.send( getString() );
 });
 
 var port = process.env.PORT || 5000;
